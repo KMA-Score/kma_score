@@ -1,0 +1,15 @@
+th {
+    @apply p-3 border border-black bg-black;
+}
+
+td {
+    @apply p-3 border-black;
+}
+
+tr:nth-child(even) {
+    @apply bg-neutral-700;
+}
+
+tr:nth-child(odd) {
+    @apply bg-neutral-600;
+}
