@@ -20,7 +20,7 @@ export default function StudentPage() {
       setSubjects(subjects);
     }
     fetchData();
-  }, []);
+  }, [studentId]);
 
   useEffect(() => {
     const TABLE_HEADER = [

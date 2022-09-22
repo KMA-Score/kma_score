@@ -42,9 +42,19 @@ async function getSubjects() {
   }
 }
 
+async function search(data) {
+  try {
+    const result = await api.get(`/search?query=${data}`);
+    return result.data.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export {
   getStatistics,
   getStudentStatistics,
   getSubjectStatistics,
   getSubjects,
+  search,
 };

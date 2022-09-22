@@ -8,12 +8,10 @@ function App() {
   return (
     <>
       <Navbar />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/student/:studentId" element={<StudentPage />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route exact path="/student/:studentId" element={<StudentPage />} />
+      </Routes>
     </>
   );
 }
