@@ -5,11 +5,13 @@ import { COLORS } from "../../utils/styling";
 import Box from "../../components/Box";
 import Table from "../../components/Table";
 import { useParams } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 export default function StudentPage() {
   const [studentStatistics, setStudentStatistics] = useState(null);
   const [subjects, setSubjects] = useState(null);
   const [tableHeader, setTableHeader] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { studentId } = useParams();
 
   useEffect(() => {
@@ -51,6 +53,14 @@ export default function StudentPage() {
     ];
     setTableHeader(TABLE_HEADER);
   }, [subjects]);
+
+  useEffect(() => {
+    if ((studentStatistics, subjects)) {
+      setLoading(false);
+    }
+  }, [studentStatistics, subjects]);
+
+  if (loading) return <Loading />;
 
   return (
     <div className="md:flex overflow-auto bg-black px-5 md:px-24 lg:px-36 pt-16 md:pt-28 pb-5">

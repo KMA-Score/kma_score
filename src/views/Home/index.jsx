@@ -2,9 +2,11 @@ import Box from "../../components/Box";
 import { COLORS } from "../../utils/styling";
 import { useEffect, useState } from "react";
 import { getStatistics } from "../../services/ApiService";
+import Loading from "../../components/Loading";
 
 export default function Home() {
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -13,6 +15,15 @@ export default function Home() {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (data) {
+      setLoading(false);
+    }
+  }, [data]);
+
+  if (loading) return <Loading />;
+
   return (
     <div className="md:flex md:h-[var(--home-height)] bg-black px-5 md:px-24 lg:px-36 pt-24 pb-5 items-center">
       <div className="flex-grow">
