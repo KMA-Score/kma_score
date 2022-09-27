@@ -15,7 +15,6 @@ export default function SearchModal({ closeModal }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(JSON.parse(get("searchHistory")));
     if (JSON.parse(get("searchHistory"))) {
       setSearchHistory(JSON.parse(get("searchHistory")));
     }

@@ -53,7 +53,7 @@ export default function Navbar() {
         <button
           className="items-center space-x-10 rounded-lg py-1.5 px-3 hidden md:flex bg-neutral-600 hover:bg-neutral-500 placeholder-neutral-300"
           type="button"
-          onClick={(event) => {
+          onClick={() => {
             setIsSearchModalOpen(true);
           }}
         >
