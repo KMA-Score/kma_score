@@ -142,10 +142,20 @@ export default function SearchModal({ closeModal }) {
         </section>
         <section className="space-y-2">
           <h6 className="font-bold px-5">
-            {searchResult.length > 0 ? "Kết quả tìm kiếm" : "Lịch sử tìm kiếm"}
+            {searchResult.length > 0 && "Kết quả tìm kiếm"}
+            {searchHistory.length > 0 && "Lịch sử tìm kiếm"}
           </h6>
           <div className="flex flex-col overflow-y-auto max-h-64 md:max-h-64 xl:max-h-96">
-            {studentList}
+            {studentList.length ? (
+              studentList
+            ) : (
+              <center className="p-5 text-neutral-500">
+                <h6>Có vẻ như bạn chưa từng tìm kiếm gì cả.</h6>
+                <br />
+                Hãy thử tìm kiếm một sinh viên bằng cách nhập tên hoặc mã sinh
+                viên vào ô tìm kiếm ở trên.
+              </center>
+            )}
           </div>
         </section>
         <a
