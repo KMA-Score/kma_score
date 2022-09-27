@@ -13,7 +13,7 @@ export default function Footer() {
         </a>{" "}
         and{" "}
         <a
-          href="https://discord.com/users/337843920966909953"
+          href="https://github.com/phuchptty"
           target="_blank"
           rel="noreferrer"
           className="bg-red-500  p-1 rounded-sm"
