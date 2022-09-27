@@ -6,6 +6,7 @@ import Box from "../../components/Box";
 import Table from "../../components/Table";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
+import NotFound from "../NotFound";
 
 export default function StudentPage() {
   const [studentStatistics, setStudentStatistics] = useState(null);
@@ -61,6 +62,8 @@ export default function StudentPage() {
   }, [studentStatistics, subjects]);
 
   if (loading) return <Loading />;
+
+  if (!studentStatistics) return <NotFound />;
 
   return (
     <div className="md:flex overflow-auto bg-black px-5 md:px-24 lg:px-36 pt-16 md:pt-28 pb-5">
