@@ -33,3 +33,7 @@ h6 {
 body, #root {
     @apply md:h-screen;
 }
+
+:root {
+    --home-height: calc(100% - 6rem);
+}

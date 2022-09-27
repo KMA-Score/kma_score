@@ -117,52 +117,48 @@ export default function SearchModal({ closeModal }) {
   };
 
   return (
-    <>
-      <div className="fixed inset-0 bg-gray-600 bg-opacity-50 h-full w-full">
-        <div className="relative top-20 md:top-1/6 mx-auto pt-5 w-5/6 md:w-1/2 shadow-lg rounded-md bg-black space-y-2">
-          <section className="flex items-center space-x-5 bg-black px-5">
+    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 h-full w-full">
+      <div className="relative top-20 md:top-1/6 mx-auto pt-5 w-5/6 md:w-2/3 lg:w-1/2 shadow-lg rounded-md bg-black space-y-2">
+        <section className="flex items-center space-x-5 bg-black px-5">
+          <ion-icon
+            name="search"
+            size="large"
+            class="text-neutral-500"
+          ></ion-icon>
+          <input
+            type="search"
+            className="w-full text-xl bg-inherit outline-none py-2 placeholder-neutral-500"
+            placeholder="Tìm kiếm theo tên, mã sinh viên..."
+            autoFocus
+            onInput={submitSearch}
+          />
+          <button className="flex" onClick={closeModal} type="button">
             <ion-icon
-              name="search"
+              name="close"
               size="large"
-              class="text-neutral-500"
+              class="text-neutral-500 hover:text-neutral-400"
             ></ion-icon>
-            <input
-              type="search"
-              className="w-full text-xl bg-inherit outline-none py-2 placeholder-neutral-500"
-              placeholder="Tìm kiếm theo tên, mã sinh viên..."
-              autoFocus
-              onInput={submitSearch}
-            />
-            <button className="flex" onClick={closeModal} type="button">
-              <ion-icon
-                name="close"
-                size="large"
-                class="text-neutral-500 hover:text-neutral-400"
-              ></ion-icon>
-            </button>
-          </section>
-          <section className="space-y-2">
-            <h6 className="font-bold px-5">
-              {searchResult.length > 0
-                ? "Kết quả tìm kiếm"
-                : "Lịch sử tìm kiếm"}
-            </h6>
-            <div className="flex flex-col overflow-y-auto max-h-64 md:max-h-32 xl:max-h-96">
-              {studentList}
-            </div>
-          </section>
-          <a
-            className="flex justify-end items-center space-x-2 px-5 py-3 border border-r-0 border-l-0 border-b-0 border-neutral-700"
-            href="https://www.meilisearch.com/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <p className="text-neutral-400">Powered by</p>
-            <MeilisearchLogo />
-          </a>
-        </div>
+          </button>
+        </section>
+        <section className="space-y-2">
+          <h6 className="font-bold px-5">
+            {searchResult.length > 0 ? "Kết quả tìm kiếm" : "Lịch sử tìm kiếm"}
+          </h6>
+          <div className="flex flex-col overflow-y-auto max-h-64 md:max-h-64 xl:max-h-96">
+            {studentList}
+          </div>
+        </section>
+        <a
+          className="flex justify-end items-center space-x-2 px-5 py-3 border border-r-0 border-l-0 border-b-0 border-neutral-700"
+          href="https://www.meilisearch.com/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <p className="text-neutral-400">Powered by</p>
+          <MeilisearchLogo />
+        </a>
       </div>
-    </>
+    </div>
   );
 }
 

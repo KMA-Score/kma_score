@@ -53,7 +53,7 @@ export default function StudentPage() {
   }, [subjects]);
 
   return (
-    <div className="md:flex bg-black px-5 md:px-24 lg:px-36 pt-16 md:pt-28 pb-5">
+    <div className="md:flex overflow-auto bg-black px-5 md:px-24 lg:px-36 pt-16 md:pt-28 pb-5">
       <div className="space-y-2 w-full">
         <h2>{studentStatistics?.name}</h2>
         <section className="flex space-x-2 overflow-auto">

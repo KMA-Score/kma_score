@@ -2,7 +2,8 @@ import "./index.css";
 import Home from "./views/Home";
 import StudentPage from "./views/StudentPage";
 import Navbar from "./components/Navbar";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route exact path="/student/:studentId" element={<StudentPage />} />
       </Routes>
+      <Footer />
     </>
   );
 }
