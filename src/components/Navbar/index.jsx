@@ -10,13 +10,15 @@ export default function Navbar() {
 
   return (
     <div className="flex h-12 md:h-24 bg-black items-center px-5 md:px-24 lg:px-36 fixed inset-x-0 z-50">
-      <div
-        className="font-bold flex-grow flex items-center space-x-2 cursor-pointer"
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        <Logo />
+      <div className="font-bold flex-grow flex items-center space-x-2">
+        <div
+          className="cursor-pointer"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          <Logo />
+        </div>
         <a
           className="text-neutral-500 font-light"
           href="https://github.com/arahiko-ayami/kma_score"
@@ -39,9 +41,18 @@ export default function Navbar() {
         >
           <ion-icon name="logo-github" class="text-3xl"></ion-icon>
         </a>
-        <ion-icon name="search-outline" class="text-3xl md:hidden"></ion-icon>
+        <button
+          className="p-0 flex items-center"
+          type="button"
+          onClick={(event) => {
+            setIsSearchModalOpen(true);
+          }}
+        >
+          <ion-icon name="search-outline" class="text-3xl md:hidden"></ion-icon>
+        </button>
         <button
           className="items-center space-x-10 rounded-lg py-1.5 px-3 hidden md:flex bg-neutral-600 hover:bg-neutral-500 placeholder-neutral-300"
+          type="button"
           onClick={(event) => {
             setIsSearchModalOpen(true);
           }}
@@ -52,7 +63,7 @@ export default function Navbar() {
       </div>
       {isSearchModalOpen && (
         <SearchModal
-          onClose={() => {
+          closeModal={() => {
             setIsSearchModalOpen(false);
           }}
         />

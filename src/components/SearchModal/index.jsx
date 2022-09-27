@@ -1,29 +1,36 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import * as ApiService from "../../services/ApiService";
 import Chip from "../Chip";
 import { useNavigate } from "react-router-dom";
 import MeilisearchLogo from "../MeilisearchLogo";
+import { get, set } from "../../services/LocalStorageService";
 
-export default function SearchModal({ onClose }) {
+export default function SearchModal({ closeModal }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState([]);
+  const [searchHistory, setSearchHistory] = useState(
+    JSON.parse(get("searchHistory")) || []
+  );
   const navigate = useNavigate();
 
-  const navigateToStudentPage = (studentId) => {
-    navigate(`/student/${studentId}`);
-    onClose();
-  };
+  useEffect(() => {
+    console.log(JSON.parse(get("searchHistory")));
+    if (JSON.parse(get("searchHistory"))) {
+      setSearchHistory(JSON.parse(get("searchHistory")));
+    }
+  }, []);
 
-  const submitSearch = (event) => {
-    setSearchQuery(event.target.value);
-  };
+  useEffect(() => {
+    return () => {
+      set("searchHistory", JSON.stringify(searchHistory));
+    };
+  }, [searchHistory]);
 
   useEffect(() => {
     if (searchQuery) {
       async function search() {
         const data = await ApiService.search(searchQuery);
-        console.log(searchQuery);
         setSearchResult(data);
       }
 
@@ -33,13 +40,87 @@ export default function SearchModal({ onClose }) {
     }
   }, [searchQuery]);
 
+  const removeHistoryItem = (event, index) => {
+    event.stopPropagation();
+    const newSearchHistory = [...searchHistory];
+    newSearchHistory.splice(index, 1);
+    setSearchHistory(newSearchHistory);
+  };
+
+  const setHistoryToLocalStorage = (student) => {
+    return new Promise((resolve, reject) => {
+      if (searchHistory.findIndex((item) => item.id === student.id) < 0) {
+        setSearchHistory([student, ...searchHistory]);
+      }
+      resolve();
+    });
+  };
+
+  const navigateToStudentPage = (student) => {
+    // use promise to wait for setHistoryToLocalStorage to finish
+    Promise.all([
+      setHistoryToLocalStorage(student),
+      navigate(`/student/${student.id}`),
+    ]).then(closeModal);
+  };
+
+  const studentList = useMemo(() => {
+    let list = [];
+
+    if (searchResult.length) {
+      list = searchResult;
+    } else if (searchHistory.length) {
+      list = searchHistory;
+    }
+
+    return list.map((student) => (
+      <div
+        key={student.id}
+        className="py-5 text-xl flex items-center hover:bg-neutral-800 cursor-pointer border-b border-neutral-700"
+        onClick={() => {
+          navigateToStudentPage(student);
+        }}
+      >
+        <div className="flex-grow px-5 space-y-2">
+          <p>{student.name}</p>
+          <div className="flex space-x-2">
+            <Chip cssClass="text-sm bg-neutral-600 border-none rounded-full font-bold">
+              <ion-icon name="golf-outline" class="text-xl pr-2"></ion-icon>
+              {student.class}
+            </Chip>
+            <Chip cssClass="text-sm bg-neutral-600 border-none rounded-full font-bold">
+              <ion-icon
+                name="person-circle-outline"
+                class="text-xl pr-2"
+              ></ion-icon>
+              {student.id}
+            </Chip>
+          </div>
+        </div>
+        {searchResult.length === 0 && (
+          <button
+            className="flex"
+            type="button"
+            onClick={(event) => removeHistoryItem(event, list.indexOf(student))}
+          >
+            <ion-icon
+              name="close"
+              class="text-neutral-500 text-2xl px-5 hover:text-neutral-400"
+            ></ion-icon>
+          </button>
+        )}
+      </div>
+    ));
+  }, [searchResult, searchHistory]);
+
+  const submitSearch = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   return (
     <>
-      <div
-        className="fixed inset-0 bg-gray-600 bg-opacity-50 h-full w-full"
-        id="my-modal"
-      >
-        <div className="relative top-20 mx-auto pt-5 w-1/2 shadow-lg rounded-md bg-black space-y-2">
+      <div className="fixed inset-0 bg-gray-600 bg-opacity-50 h-full w-full">
+        <div className="relative top-20 md:top-1/6 mx-auto pt-5 w-5/6 md:w-1/2 shadow-lg rounded-md bg-black space-y-2">
           <section className="flex items-center space-x-5 bg-black px-5">
             <ion-icon
               name="search"
@@ -53,7 +134,7 @@ export default function SearchModal({ onClose }) {
               autoFocus
               onInput={submitSearch}
             />
-            <button className="flex" onClick={onClose} type="button">
+            <button className="flex" onClick={closeModal} type="button">
               <ion-icon
                 name="close"
                 size="large"
@@ -67,45 +148,8 @@ export default function SearchModal({ onClose }) {
                 ? "Kết quả tìm kiếm"
                 : "Lịch sử tìm kiếm"}
             </h6>
-            <div className="flex flex-col overflow-y-scroll max-h-32 xl:max-h-96">
-              {searchResult.length > 0 &&
-                searchResult.map((item) => (
-                  <div
-                    key={item.id}
-                    className="py-5 text-xl flex items-center hover:bg-neutral-800 cursor-pointer border border-r-0 border-l-0 border-t-0 border-neutral-700"
-                    onClick={() => {
-                      navigateToStudentPage(item.id);
-                    }}
-                  >
-                    <div className="flex-grow px-5 space-y-2">
-                      <p>{item.name}</p>
-                      <div className="flex space-x-2">
-                        <Chip cssClass="text-sm bg-neutral-600 border-none rounded-full font-bold">
-                          <ion-icon
-                            name="golf-outline"
-                            class="text-xl pr-2"
-                          ></ion-icon>
-                          {item.class}
-                        </Chip>
-                        <Chip cssClass="text-sm bg-neutral-600 border-none rounded-full font-bold">
-                          <ion-icon
-                            name="person-circle-outline"
-                            class="text-xl pr-2"
-                          ></ion-icon>
-                          {item.id}
-                        </Chip>
-                      </div>
-                    </div>
-                    {searchResult.length === 0 && (
-                      <button className="flex" type="button">
-                        <ion-icon
-                          name="close"
-                          class="text-neutral-500 text-2xl px-5 hover:text-neutral-400"
-                        ></ion-icon>
-                      </button>
-                    )}
-                  </div>
-                ))}
+            <div className="flex flex-col overflow-y-auto max-h-64 md:max-h-32 xl:max-h-96">
+              {studentList}
             </div>
           </section>
           <a
@@ -124,5 +168,5 @@ export default function SearchModal({ onClose }) {
 }
 
 SearchModal.propTypes = {
-  onClose: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
 };
