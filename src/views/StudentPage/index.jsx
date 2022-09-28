@@ -15,8 +15,17 @@ export default function StudentPage() {
   const [loading, setLoading] = useState(true);
   const { studentId } = useParams();
 
+  const resetState = () => {
+    if (!loading) {
+      setStudentStatistics(null);
+      setSubjects(null);
+      setLoading(true);
+    }
+  };
+
   useEffect(() => {
     async function fetchData() {
+      resetState();
       const studentStatistics = await getStudentStatistics(studentId);
       const subjects = await getSubjects();
       setStudentStatistics(studentStatistics);
@@ -56,7 +65,7 @@ export default function StudentPage() {
   }, [subjects]);
 
   useEffect(() => {
-    if ((studentStatistics, subjects)) {
+    if (studentStatistics && subjects) {
       setLoading(false);
     }
   }, [studentStatistics, subjects]);
