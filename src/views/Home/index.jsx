@@ -25,7 +25,7 @@ export default function Home() {
   if (loading) return <Loading />;
 
   return (
-    <div className="md:flex md:h-[var(--home-height)] bg-black px-5 md:px-24 lg:px-36 pt-24 pb-5 items-center">
+    <div className="md:flex h-screen lg:h-[var(--home-height)] bg-black px-5 md:px-24 lg:px-36 pt-24 pb-5 items-center">
       <div className="flex-grow">
         <h3 className="font-bold leading-tight decoration-4 underline-offset-4">
           Website{" "}

@@ -9,7 +9,7 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex h-12 md:h-24 bg-black items-center px-5 md:px-24 lg:px-36 fixed inset-x-0 z-50">
+    <div className="flex h-14 md:h-24 bg-black items-center px-5 md:px-24 lg:px-36 fixed inset-x-0 z-50">
       <div className="font-bold flex-grow flex items-center space-x-2">
         <div
           className="cursor-pointer"

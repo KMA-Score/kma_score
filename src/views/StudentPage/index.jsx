@@ -96,7 +96,7 @@ export default function StudentPage() {
             <h3>{studentStatistics?.avgScore}</h3>
           </Box>
         </section>
-        <section>
+        <section className="overflow-x-auto">
           {studentStatistics && subjects && (
             <Table data={studentStatistics?.scores} columns={tableHeader} />
           )}
