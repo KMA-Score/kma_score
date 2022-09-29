@@ -1,8 +1,11 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 export default function Alert({ children, isCloseable = true, type = "info" }) {
   const [show, setShow] = useState(true);
+  const iconClass = useMemo(() => {
+    return "hidden pr-2 md:block md:text-2xl";
+  }, []);
 
   const setAlertColors = () => {
     switch (type) {
@@ -23,25 +26,20 @@ export default function Alert({ children, isCloseable = true, type = "info" }) {
         return (
           <ion-icon
             name="checkmark-done-circle-outline"
-            class="pr-2 text-2xl"
+            class={iconClass}
           ></ion-icon>
         );
       case "error":
-        return (
-          <ion-icon name="warning-outline" class="pr-2 text-2xl"></ion-icon>
-        );
+        return <ion-icon name="warning-outline" class={iconClass}></ion-icon>;
       case "warning":
         return (
-          <ion-icon
-            name="alert-circle-outline"
-            class="pr-2 text-2xl"
-          ></ion-icon>
+          <ion-icon name="alert-circle-outline" class={iconClass}></ion-icon>
         );
       default:
         return (
           <ion-icon
             name="information-circle-outline"
-            class="pr-2 text-2xl"
+            class={iconClass}
           ></ion-icon>
         );
     }
