@@ -7,6 +7,7 @@ import Table from "../../components/Table";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
 import NotFound from "../NotFound";
+import Alert from "../../components/Alert";
 
 export default function StudentPage() {
   const [studentStatistics, setStudentStatistics] = useState(null);
@@ -105,6 +106,10 @@ export default function StudentPage() {
             <h3>{studentStatistics?.avgScore}</h3>
           </Box>
         </section>
+        <Alert type="warning">
+          Do điểm các môn tiếng Anh cơ bản có thể quy đổi từ các chứng chỉ, điểm
+          được hiển thị có thể không chính xác
+        </Alert>
         <section className="overflow-x-auto">
           {studentStatistics && subjects && (
             <Table data={studentStatistics?.scores} columns={tableHeader} />
