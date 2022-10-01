@@ -12,12 +12,6 @@ async function getStatistics() {
 async function getStudentStatistics(studentId) {
   try {
     const result = await api.get(`/student/${studentId}`);
-    result.data.data.scores.map((item) => {
-      delete item.studentId;
-      delete item.id;
-
-      return item;
-    });
     return result.data.data;
   } catch (error) {
     console.error(error);

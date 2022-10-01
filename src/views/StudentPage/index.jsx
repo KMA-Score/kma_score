@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getStudentStatistics, getSubjects } from "../../services/ApiService";
+import { getStudentStatistics } from "../../services/ApiService";
 import Chip from "../../components/Chip";
 import { COLORS } from "../../utils/styling";
 import Box from "../../components/Box";
@@ -11,7 +11,6 @@ import Alert from "../../components/Alert";
 
 export default function StudentPage() {
   const [studentStatistics, setStudentStatistics] = useState(null);
-  const [subjects, setSubjects] = useState(null);
   const [tableHeader, setTableHeader] = useState([]);
   const [loading, setLoading] = useState(true);
   const { studentId } = useParams();
@@ -19,7 +18,6 @@ export default function StudentPage() {
   const resetState = () => {
     if (!loading) {
       setStudentStatistics(null);
-      setSubjects(null);
       setLoading(true);
     }
   };
@@ -28,9 +26,7 @@ export default function StudentPage() {
     async function fetchData() {
       resetState();
       const studentStatistics = await getStudentStatistics(studentId);
-      const subjects = await getSubjects();
       setStudentStatistics(studentStatistics);
-      setSubjects(subjects);
     }
     fetchData();
   }, [studentId]);
@@ -39,12 +35,7 @@ export default function StudentPage() {
     const TABLE_HEADER = [
       {
         label: "Tên môn học",
-        valueRender: (value) => {
-          if (subjects) {
-            const index = subjects.findIndex((subject) => subject.id === value);
-            if (index >= 0) return subjects[index].name;
-          }
-        },
+        valueRender: (value) => value.name,
       },
       {
         label: "Điểm thành phần 1",
@@ -63,13 +54,13 @@ export default function StudentPage() {
       },
     ];
     setTableHeader(TABLE_HEADER);
-  }, [subjects]);
+  }, []);
 
   useEffect(() => {
-    if (studentStatistics && subjects) {
+    if (studentStatistics) {
       setLoading(false);
     }
-  }, [studentStatistics, subjects]);
+  }, [studentStatistics]);
 
   if (loading) return <Loading />;
 
@@ -111,7 +102,7 @@ export default function StudentPage() {
           được hiển thị có thể không chính xác
         </Alert>
         <section className="overflow-x-auto">
-          {studentStatistics && subjects && (
+          {studentStatistics && (
             <Table data={studentStatistics?.scores} columns={tableHeader} />
           )}
         </section>
