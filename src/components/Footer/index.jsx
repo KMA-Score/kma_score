@@ -20,7 +20,7 @@ export default function Footer() {
         >
           @phuchptty
         </a>{" "}
-        with ❤
+        with ❤️
       </p>
     </div>
   );
