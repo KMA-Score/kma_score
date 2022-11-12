@@ -34,7 +34,7 @@ export default function Navbar() {
       </div>
       <div className="flex items-center space-x-4">
         <a
-          href="https://github.com/arahiko-ayami/kma_score"
+          href="https://github.com/KMA-Score/kma_score"
           target="_blank"
           rel="noreferrer"
           className="text-3xl flex"
