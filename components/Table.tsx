@@ -30,7 +30,7 @@ export default function Table({
     const tableData: JSX.Element[] = data?.map((row, index) => {
       return (
         <tr key={index} className="hover">
-          <th>{index + 1}</th>
+          <td className="font-bold">{index + 1}</td>
           {Object.entries(row).map(([key, value], index) => {
             if (columns[index].valueRender) {
               return (
@@ -49,7 +49,7 @@ export default function Table({
   }, [columns, data]);
 
   return (
-    <div className="overflow-x-auto">
+    <div className="">
       <table className="table w-full">
         <thead>{tableHeader}</thead>
         <tbody>{tableData}</tbody>

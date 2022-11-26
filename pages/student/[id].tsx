@@ -2,6 +2,7 @@ import Table from "../../components/Table";
 import Head from "next/head";
 import StudentService from "../../services/Student.service";
 import { Student as StudentModel } from "../../models/Student.model";
+import Loading from "../../components/Loading";
 
 export async function getServerSideProps(context: { params: { id: string } }) {
   const id = context.params.id;

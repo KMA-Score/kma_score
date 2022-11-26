@@ -50,3 +50,8 @@ h6 {
 ::-webkit-scrollbar-thumb:hover {
     @apply bg-ctp--blue;
 }
+
+th {
+    @apply sticky top-16;
+}
+

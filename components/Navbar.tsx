@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export default function Navbar() {
   return (
@@ -14,12 +17,12 @@ export default function Navbar() {
         rel="noreferrer"
         target="blank"
       >
-        <ion-icon name="logo-github" size="large"></ion-icon>
+        <FontAwesomeIcon icon={faGithub} size="2x" />
       </a>
       <label className="flex-none pl-4" htmlFor="search-modal">
         <div className="input input-bordered flex items-center btn transform-none normal-case">
           Tìm kiếm nhanh...
-          <ion-icon name="search-outline" class="pl-10"></ion-icon>
+          <FontAwesomeIcon icon={faMagnifyingGlass} className="pl-10" />
         </div>
       </label>
     </div>

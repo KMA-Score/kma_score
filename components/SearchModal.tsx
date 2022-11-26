@@ -92,6 +92,7 @@ export default function SearchModal() {
           onClick={async () => {
             setHistory(student);
             modalToggleCheckboxRef.current?.click();
+            cleanUp();
           }}
         >
           <div className="flex flex-col justify-center space-y-2.5 rounded-lg w-full">
@@ -134,12 +135,11 @@ export default function SearchModal() {
               className="input w-full"
               ref={inputRef}
               onInput={submitSearch}
-              autoFocus
             />
             <label
               htmlFor="search-modal"
               className="btn btn-sm btn-circle"
-              onChange={cleanUp}
+              onClick={cleanUp}
             >
               ✕
             </label>
