@@ -95,7 +95,7 @@ export default function SearchModal() {
         legacyBehavior
       >
         <div
-          className="w-full p-4 text-left bg-primary/10 flex items-center"
+          className="w-full p-4 text-left bg-primary/10 flex items-center cursor-pointer"
           onClick={async () => {
             setHistory(student);
             modalToggleCheckboxRef.current?.click();
