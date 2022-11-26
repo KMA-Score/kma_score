@@ -17,7 +17,7 @@ export default function Table({
     const header: JSX.Element = (
       <tr>
         <th></th>
-        {columns.map((column, index) => {
+        {columns?.map((column, index) => {
           return (
             <th className="text-left" key={index}>
               {column.label}
@@ -27,7 +27,7 @@ export default function Table({
       </tr>
     );
 
-    const tableData: JSX.Element[] = data.map((row, index) => {
+    const tableData: JSX.Element[] = data?.map((row, index) => {
       return (
         <tr key={index} className="hover">
           <th>{index + 1}</th>
