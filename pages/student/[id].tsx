@@ -59,10 +59,10 @@ export default function Student({
         <link rel="icon" href="/public/favicon.ico" />
       </Head>
       <div className="p-5 space-y-5">
-        <h2>{data.name}</h2>
+        <h2>{data?.name}</h2>
         <div className="space-x-2">
-          <p className="btn btn-outline btn-success">{data.id}</p>
-          <p className="btn btn-outline btn-error">{data.class}</p>
+          <p className="btn btn-outline btn-success">{data?.id}</p>
+          <p className="btn btn-outline btn-error">{data?.class}</p>
         </div>
 
         <div className="stats shadow w-full bg-primary/20">
@@ -85,7 +85,9 @@ export default function Student({
               </svg>
             </div>
             <div className="stat-title">Số môn đã hoàn thành</div>
-            <div className="stat-value text-success">{data.passedSubjects}</div>
+            <div className="stat-value text-success">
+              {data?.passedSubjects}
+            </div>
           </div>
 
           <div className="stat">
@@ -118,7 +120,7 @@ export default function Student({
             </div>
             <div className="stat-title">Số môn còn nợ</div>
             <div className="stat-value text-secondary">
-              {data.failedSubjects}
+              {data?.failedSubjects}
             </div>
           </div>
 
@@ -151,10 +153,10 @@ export default function Student({
               </svg>
             </div>
             <div className="stat-title">GPA</div>
-            <div className="stat-value text-primary">{data.avgScore}</div>
+            <div className="stat-value text-primary">{data?.avgScore}</div>
           </div>
         </div>
-        <Table columns={columns} data={data.scores} />
+        <Table columns={columns} data={data?.scores} />
       </div>
     </>
   );
