@@ -18,21 +18,10 @@ export default function App({ Component, pageProps }: AppProps) {
   Router.events.on("routeChangeComplete", () => setLoading(false));
   Router.events.on("routeChangeError", () => setLoading(false));
 
-  if (loading) {
-    return (
-      <div className="px-4 lg:p-2 lg:px-36 flex flex-auto flex-col h-full">
-        <Navbar />
-        <Loading isLoading={loading} />
-        <Footer />
-        <SearchModal />
-      </div>
-    );
-  }
-
   return (
     <div className="px-4 lg:p-2 lg:px-36 flex flex-auto flex-col h-full">
       <Navbar />
-      <Component {...pageProps} />
+      {loading ? <Loading isLoading={loading} /> : <Component {...pageProps} />}
       <Footer />
       <SearchModal />
     </div>
