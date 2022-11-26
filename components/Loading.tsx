@@ -4,7 +4,12 @@ export default function Loading({ isLoading }: { isLoading: boolean }) {
   }
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center">
+    <div className="h-full flex flex-col justify-center items-center">
+      <style global jsx>{`
+        #__next {
+          height: 100vh !important;
+        }
+      `}</style>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="200px"

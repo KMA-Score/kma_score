@@ -38,3 +38,6 @@ next-env.d.ts
 # IDE
 .vscode
 .idea
+
+# lock file
+yarn.lock

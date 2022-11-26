@@ -5,7 +5,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export default function Navbar() {
   return (
-    <div className="navbar bg-base-100 top-0 sticky h-full z-40">
+    <div className="navbar bg-base-100 top-0 sticky z-40">
       <div className="flex-1">
         <Link href="/">
           <p className="btn btn-ghost normal-case text-xl">./kma_score</p>

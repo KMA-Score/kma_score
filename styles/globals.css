@@ -3,59 +3,62 @@
 @tailwind utilities;
 
 :root {
-    --home-height: calc(100vh - 4rem - .5rem);
-    @apply underline-offset-4;
+  @apply underline-offset-4;
+}
+
+body {
+  height: 100vh;
 }
 
 h1 {
-    @apply text-4xl md:text-6xl;
+  @apply text-4xl md:text-6xl;
 }
 
 h2 {
-    @apply text-3xl md:text-5xl;
+  @apply text-3xl md:text-5xl;
 }
 
 h3 {
-    @apply text-2xl md:text-4xl
+  @apply text-2xl md:text-4xl
 }
 
 h4 {
-    @apply text-xl md:text-3xl;
+  @apply text-xl md:text-3xl;
 }
 
 h5 {
-    @apply text-lg md:text-2xl;
+  @apply text-lg md:text-2xl;
 }
 
 h6 {
-    @apply text-base md:text-xl;
+  @apply text-base md:text-xl;
 }
 
 ::-webkit-scrollbar {
-    width: 5px;
+  width: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    border-radius: 10px;
+  border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    @apply bg-ctp--blue bg-opacity-60;
-    border-radius: 10px;
+  @apply bg-ctp--blue bg-opacity-60;
+  border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    @apply bg-ctp--blue;
+  @apply bg-ctp--blue;
 }
 
 th {
-    @apply lg:sticky lg:top-16;
+  @apply lg:sticky lg:top-16;
 }
 
 th > :first-child {
-    @apply top-0;
+  @apply top-0;
 }
 
