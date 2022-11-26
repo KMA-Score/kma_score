@@ -133,7 +133,7 @@ export default function SearchModal() {
         className="modal-toggle"
         ref={modalToggleCheckboxRef}
       />
-      <div className="modal">
+      <div className="modal modal-bottom sm:modal-middle">
         <div className="modal-box flex flex-col space-y-5 max-w-2xl">
           <div className="flex items-center space-x-5">
             <input

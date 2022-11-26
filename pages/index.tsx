@@ -12,7 +12,7 @@ export default function Home() {
         </Head>
 
         <main className="hero min-h-[var(--home-height)]">
-          <div className="hero-content text-center">
+          <div className="hero-content text-center px-0">
             <div className="space-y-5">
               <h2 className="font-bold">
                 Website{" "}

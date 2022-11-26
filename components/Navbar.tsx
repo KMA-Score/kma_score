@@ -19,11 +19,17 @@ export default function Navbar() {
       >
         <FontAwesomeIcon icon={faGithub} size="2x" />
       </a>
-      <label className="flex-none pl-4" htmlFor="search-modal">
+      <label className="flex-none pl-4 hidden md:block" htmlFor="search-modal">
         <div className="input input-bordered flex items-center btn transform-none normal-case">
           Tìm kiếm nhanh...
           <FontAwesomeIcon icon={faMagnifyingGlass} className="pl-10" />
         </div>
+      </label>
+      <label
+        className="btn btn-ghost flex-none rounded-lg btn-square md:hidden"
+        htmlFor="search-modal"
+      >
+        <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" />
       </label>
     </div>
   );

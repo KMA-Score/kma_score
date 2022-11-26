@@ -4,7 +4,7 @@ export default function Loading({ isLoading }: { isLoading: boolean }) {
   }
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center z-50">
+    <div className="h-screen flex flex-col justify-center items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="200px"
