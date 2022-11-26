@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   if (loading) {
     return (
-      <div className="p-2 px-36">
+      <div className="px-4 lg:p-2 lg:px-36">
         <Navbar />
         <Loading isLoading={loading} />
         <Footer />
@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <div className="p-2 px-36">
+    <div className="px-4 lg:p-2 lg:px-36">
       <Navbar />
       <Component {...pageProps} />
       <Footer />

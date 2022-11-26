@@ -2,6 +2,7 @@ import Link from "next/link";
 import {
   BaseSyntheticEvent,
   ChangeEvent,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -36,7 +37,7 @@ export default function SearchModal() {
       return;
     }
     LocalStorageService.set("searchHistory", JSON.stringify(searchHistory));
-  }, [searchHistory]);
+  }, [firstLoad, searchHistory]);
 
   useEffect(() => {
     if (query) {
@@ -61,18 +62,24 @@ export default function SearchModal() {
     }
   };
 
-  const removeHistoryItem = (event: BaseSyntheticEvent, index: number) => {
-    event.stopPropagation();
-    const newSearchHistory = [...searchHistory];
-    newSearchHistory.splice(index, 1);
-    setSearchHistory(newSearchHistory);
-  };
+  const removeHistoryItem = useCallback(
+    (event: BaseSyntheticEvent, index: number) => {
+      event.stopPropagation();
+      const newSearchHistory = [...searchHistory];
+      newSearchHistory.splice(index, 1);
+      setSearchHistory(newSearchHistory);
+    },
+    [searchHistory]
+  );
 
-  const setHistory = (student: Student) => {
-    if (searchHistory?.findIndex((item) => item.id === student.id) < 0) {
-      setSearchHistory([student, ...searchHistory]);
-    }
-  };
+  const setHistory = useCallback(
+    (student: Student) => {
+      if (searchHistory?.findIndex((item) => item.id === student.id) < 0) {
+        setSearchHistory([student, ...searchHistory]);
+      }
+    },
+    [searchHistory]
+  );
 
   const studentList = useMemo(() => {
     let list: Array<Student> = [];
@@ -116,7 +123,7 @@ export default function SearchModal() {
         </div>
       </Link>
     ));
-  }, [searchResult, searchHistory]);
+  }, [searchResult, searchHistory, setHistory, removeHistoryItem]);
 
   return (
     <>
@@ -126,7 +133,7 @@ export default function SearchModal() {
         className="modal-toggle"
         ref={modalToggleCheckboxRef}
       />
-      <div className="modal">
+      <div className="modal modal-bottom sm:modal-middle">
         <div className="modal-box flex flex-col space-y-5 max-w-2xl">
           <div className="flex items-center space-x-5">
             <input

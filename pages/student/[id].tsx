@@ -66,7 +66,7 @@ export default function Student({
           <p className="btn btn-outline btn-error">{data?.class}</p>
         </div>
 
-        <div className="stats shadow w-full bg-primary/20">
+        <div className="stats shadow w-full bg-primary/20 stats-vertical md:stats-horizontal">
           <div className="stat">
             <div className="stat-figure text-success">
               <svg
