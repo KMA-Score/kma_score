@@ -8,7 +8,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import Loading from "../components/Loading";
 import { useState } from "react";
 import { Router } from "next/router";
-import { Simulate } from "react-dom/test-utils";
+
 config.autoAddCss = false;
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   if (loading) {
     return (
-      <div className="px-4 lg:p-2 lg:px-36">
+      <div className="px-4 lg:p-2 lg:px-36 flex flex-auto flex-col h-full">
         <Navbar />
         <Loading isLoading={loading} />
         <Footer />
@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <div className="px-4 lg:p-2 lg:px-36">
+    <div className="px-4 lg:p-2 lg:px-36 flex flex-auto flex-col h-full">
       <Navbar />
       <Component {...pageProps} />
       <Footer />
