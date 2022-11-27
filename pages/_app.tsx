@@ -24,15 +24,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>./kma_score</title>
         <meta property="og:title" content="./kma_score" />
-        <meta
-          property="og:description"
-          content="Website tra cứu điểm dành cho sinh viên KMA"
-        />
-        <meta
-          name="description"
-          content="Website tra cứu điểm dành cho sinh viên KMA"
-        />{" "}
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="px-4 lg:p-2 lg:px-36 flex flex-auto flex-col h-full">
         <Navbar />
