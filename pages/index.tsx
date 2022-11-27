@@ -1,9 +1,19 @@
 import Head from "next/head";
-import Script from "next/script";
 
 export default function Home() {
   return (
     <>
+      <Head>
+        <title>./kma_score</title>
+        <meta
+          property="og:description"
+          content="Website tra cứu điểm dành cho sinh viên KMA"
+        />
+        <meta
+          name="description"
+          content="Website tra cứu điểm dành cho sinh viên KMA"
+        />{" "}
+      </Head>
       <div className="h-full">
         <style global jsx>{`
           #__next {
