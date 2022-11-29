@@ -9,6 +9,7 @@ import Loading from "../components/Loading";
 import { useState } from "react";
 import { Router } from "next/router";
 import Head from "next/head";
+import { SessionProvider } from "next-auth/react";
 
 config.autoAddCss = false;
 
@@ -21,20 +22,22 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head>
-        <title>./kma_score</title>
-        <meta property="og:title" content="./kma_score" />
-      </Head>
-      <div className="px-4 lg:p-2 lg:px-36 flex flex-auto flex-col h-full">
-        <Navbar />
-        {loading ? (
-          <Loading isLoading={loading} />
-        ) : (
-          <Component {...pageProps} />
-        )}
-        <Footer />
-        <SearchModal />
-      </div>
+      <SessionProvider session={pageProps.session}>
+        <Head>
+          <title>./kma_score</title>
+          <meta property="og:title" content="./kma_score" />
+        </Head>
+        <div className="px-4 lg:p-2 lg:px-36 flex flex-auto flex-col h-full">
+          <Navbar />
+          {loading ? (
+            <Loading isLoading={loading} />
+          ) : (
+            <Component {...pageProps} />
+          )}
+          <Footer />
+          <SearchModal />
+        </div>
+      </SessionProvider>
     </>
   );
 }
