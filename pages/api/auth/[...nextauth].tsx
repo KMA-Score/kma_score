@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import AzureADProvider from "next-auth/providers/azure-ad";
+import AuthService from "../../../services/Auth.service";
 
 export const authOptions = {
   providers: [
@@ -18,10 +19,16 @@ export const authOptions = {
       return token;
     },
     async session({ session, token, user }: any) {
-      session.accessToken = token.accessToken;
-      session.user.id = token.id;
+      try {
+        const verifyRsp = await AuthService.verifyToken(token.accessToken);
 
-      return session;
+        session.accessToken = token.accessToken;
+        session.user.id = token.id;
+
+        return session;
+      } catch (e) {
+        return {};
+      }
     },
   },
 };
