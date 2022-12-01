@@ -50,7 +50,7 @@ export default function Navbar() {
         </Link>
       </div>
 
-      {/*<p>{JSON.stringify(data)}</p>*/}
+      <p>{JSON.stringify(data)}</p>
 
       {authComp()}
 

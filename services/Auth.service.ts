@@ -2,9 +2,9 @@ import { AxiosResponse } from "axios";
 import { api } from "../utils/axios";
 
 class AuthService {
-  public static async verifyToken(accessToken: string): Promise<AxiosResponse> {
-    return api.post(`/auth/verifyToken`, {
-      accessToken,
+  public static async userLoginReq(token: string): Promise<AxiosResponse> {
+    return api.post(`/auth/userLoginReq`, {
+      token,
     });
   }
 }
