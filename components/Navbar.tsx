@@ -15,6 +15,14 @@ export default function Navbar() {
       return (
         <div className="dropdown mr-2">
           <label tabIndex={0} className="btn m-1">
+            <img
+              src={
+                data.user.image ||
+                "https://securitydvrinc.com/wp-content/uploads/2021/01/depositphotos_134255532-stock-illustration-profile-placeholder-male-default-profile.jpg"
+              }
+              alt="Avatar"
+              className="mr-2 h-4/5 w-auto"
+            />
             {data?.user?.name}
           </label>
 
@@ -50,7 +58,7 @@ export default function Navbar() {
         </Link>
       </div>
 
-      <p>{JSON.stringify(data)}</p>
+      {/*<p>{JSON.stringify(data)}</p>*/}
 
       {authComp()}
 

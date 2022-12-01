@@ -16,36 +16,35 @@ export const authOptions = {
       if (account) {
         token.accessToken = account.access_token;
 
-        const signedToken = jwtSign({
-          ...user,
-          exp: account.expires_at,
-        });
-
         try {
-          await AuthService.userLoginReq(signedToken);
+          const signedToken = jwtSign({
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            msExp: account.expires_at,
+            exp: account.expires_at,
+          });
 
-          return token;
-        } catch (e) {
-          console.log(e);
-          return {};
+          const rsp = await AuthService.userLoginReq(signedToken);
+
+          token.beToken = rsp.data.data.token;
+        } catch (e: any) {
+          console.log(e.response.data);
         }
-      } else {
-        return {};
       }
 
-      // return token;
+      return token;
     },
-    async session({ session, token, user }: any) {
-      try {
-        // const verifyRsp = await AuthService.verifyToken(token.accessToken);
-
-        session.accessToken = token.accessToken;
-        session.user.id = token.id;
-
-        return session;
-      } catch (e) {
+    async session({ session, token }: any) {
+      if (!token.beToken) {
         return {};
       }
+
+      session.accessToken = token.accessToken;
+      session.user.id = token.id;
+      session.beToken = token.beToken;
+
+      return session;
     },
   },
 };
