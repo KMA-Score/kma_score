@@ -23,7 +23,9 @@
     "daisyui": "^2.41.0",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
+    "jsonwebtoken": "^8.5.1",
     "next": "13.0.3",
+    "next-auth": "^4.17.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "4.9.3",
@@ -31,6 +33,7 @@
   },
   "devDependencies": {
     "@catppuccin/tailwindcss": "^0.1.1",
+    "@types/jsonwebtoken": "^8.5.9",
     "autoprefixer": "^10.4.13",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
