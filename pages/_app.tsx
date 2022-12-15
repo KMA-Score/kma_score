@@ -25,21 +25,23 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>./kma_score</title>
         <meta property="og:title" content="./kma_score" />
-        {/*Google tag (gtag.js)*/}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-JNT8RDZ7B0"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
+      </Head>
+
+      {/*Google tag (gtag.js)*/}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-JNT8RDZ7B0"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){window.dataLayer.push(arguments);}
           gtag('js', new Date());
 
           gtag('config', 'G-JNT8RDZ7B0');
         `}
-        </Script>
-      </Head>
+      </Script>
+
       <div className="px-4 lg:p-2 lg:px-36 flex flex-auto flex-col h-full">
         <Navbar />
         {loading ? (
