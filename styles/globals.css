@@ -54,10 +54,6 @@ h6 {
   @apply bg-ctp--blue;
 }
 
-th {
-  @apply lg:sticky lg:top-16;
-}
-
 th > :first-child {
   @apply top-0;
 }
