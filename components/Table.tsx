@@ -49,7 +49,7 @@ export default function Table({
   }, [columns, data]);
 
   return (
-    <div className="overflow-x-auto lg:overflow-x-visible">
+    <div className="overflow-x-auto">
       <table className="table w-full">
         <thead>{tableHeader}</thead>
         <tbody>{tableData}</tbody>
