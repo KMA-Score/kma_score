@@ -16,10 +16,6 @@ axiosInstance.interceptors.request.use(
       return config;
     }
 
-    if (!config.headers) {
-      config.headers = {};
-    }
-
     config.headers["X-KMA-API-KEY"] = process.env.NEXT_PUBLIC_KMA_API_KEY;
 
     const key = Buffer.from(process.env.NEXT_PUBLIC_KMA_API_SECRET, "base64");
