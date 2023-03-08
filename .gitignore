@@ -41,3 +41,4 @@ next-env.d.ts
 
 # lock file
 yarn.lock
+pnpm-lock.yaml
