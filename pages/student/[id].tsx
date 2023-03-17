@@ -30,7 +30,7 @@ export async function getServerSideProps(context: { params: { id: string } }) {
   ];
 
   try {
-    const res = await StudentService.get(id);
+    const res = await StudentService.getScores(id);
     return {
       props: {
         data: res.data.data,
