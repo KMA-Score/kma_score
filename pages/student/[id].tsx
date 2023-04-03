@@ -2,7 +2,6 @@ import Table from "../../components/Table";
 import Head from "next/head";
 import StudentService from "../../services/Student.service";
 import { Student as StudentModel } from "../../models/Student.model";
-import Loading from "../../components/Loading";
 
 export async function getServerSideProps(context: { params: { id: string } }) {
   const id = context.params.id;
@@ -30,10 +29,10 @@ export async function getServerSideProps(context: { params: { id: string } }) {
   ];
 
   try {
-    const res = await StudentService.getScores(id);
+    const { data } = await StudentService.getScores(id);
     return {
       props: {
-        data: res.data.data,
+        data,
         columns: TABLE_HEADERS,
       },
     };
@@ -55,7 +54,7 @@ export default function Student({
   return (
     <>
       <Head>
-        <title>./kma_score - {data?.name}</title>
+        <title>{`./kma_score - ${data?.name}`}</title>
         <meta property="og:title" content={`./kma_score - ${data?.name}`} />
         <meta
           name="description"

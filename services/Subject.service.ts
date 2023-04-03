@@ -3,11 +3,11 @@ import { api } from "../utils/axios";
 
 class SubjectService {
   get(subjectId: string): Promise<AxiosResponse> {
-    return api.get(`/subject/${subjectId}`);
+    return api.get(`/subject/${subjectId}`).then((res) => res.data);
   }
 
   getAll(): Promise<AxiosResponse> {
-    return api.get("/subjects");
+    return api.get("/subjects").then((res) => res.data);
   }
 }
 
