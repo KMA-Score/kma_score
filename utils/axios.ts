@@ -2,23 +2,20 @@ import axios from "axios";
 import { getTimestamp } from "./time";
 import { encryptWithAesCbc } from "./aes";
 
-const axiosInstance = axios.create({
+const axiosBaseAPIInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
   timeout: 5000,
 });
 
-axiosInstance.interceptors.request.use(
+axiosBaseAPIInstance.interceptors.request.use(
   (config) => {
-    if (
-      !process.env.NEXT_PUBLIC_KMA_API_KEY ||
-      !process.env.NEXT_PUBLIC_KMA_API_SECRET
-    ) {
+    if (!process.env.KMA_API_KEY || !process.env.KMA_API_SECRET) {
       return config;
     }
 
-    config.headers["X-KMA-API-KEY"] = process.env.NEXT_PUBLIC_KMA_API_KEY;
+    config.headers["X-KMA-API-KEY"] = process.env.KMA_API_KEY;
 
-    const key = Buffer.from(process.env.NEXT_PUBLIC_KMA_API_SECRET, "base64");
+    const key = Buffer.from(process.env.KMA_API_SECRET, "base64");
 
     const timestamp = String(getTimestamp());
     config.headers["X-KMA-API-SECRET-HASH"] = encryptWithAesCbc(timestamp, key);
@@ -30,4 +27,9 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-export const api = axiosInstance;
+const axiosNextAPIInstance = axios.create({
+  timeout: 5000,
+});
+
+export const api = axiosBaseAPIInstance;
+export const apiNext = axiosNextAPIInstance;

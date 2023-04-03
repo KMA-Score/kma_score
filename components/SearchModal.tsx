@@ -8,10 +8,12 @@ import {
   useRef,
   useState,
 } from "react";
-import CommonService from "../services/Common.service";
 import { Student } from "../models/Student.model";
 import LocalStorageService from "../services/LocalStorage.service";
 import { plainToInstance } from "class-transformer";
+import useSWR from "swr";
+import { apiNext } from "../utils/axios";
+import * as _ from "lodash";
 
 export default function SearchModal() {
   const modalToggleCheckboxRef = useRef<HTMLInputElement>(null);
@@ -21,6 +23,19 @@ export default function SearchModal() {
   const [searchResult, setSearchResult] = useState<Array<Student>>([]);
   const [searchHistory, setSearchHistory] = useState<Array<Student>>([]);
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
+
+  const { data, error, isLoading } = useSWR(
+    query ? [`/api/search/${query}`, query] : null,
+    ([url, query]) => apiNext.get(url).then((res) => res.data)
+  );
+
+  const debounceSearch = useCallback(
+    _.debounce((input: string) => {
+      setQuery(input);
+      setSearchResult(data?.data || []);
+    }, 1000),
+    []
+  );
 
   useEffect(() => {
     const history = plainToInstance(
@@ -40,18 +55,14 @@ export default function SearchModal() {
   }, [firstLoad, searchHistory]);
 
   useEffect(() => {
-    if (query) {
-      const timeout = setTimeout(async () => {
-        const res = await CommonService.search(query);
-        setSearchResult(res.data.data);
-      }, 500);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [query]);
+    if (!query.length)
+      setSearchResult(searchHistory?.length ? searchHistory : []);
+    else if (data?.data?.length) setSearchResult(data?.data);
+    else setSearchResult([]);
+  }, [query, searchHistory, data]);
 
   const submitSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
+    debounceSearch(event.target.value);
   };
 
   const cleanUp = () => {
