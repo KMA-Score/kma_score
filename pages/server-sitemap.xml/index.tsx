@@ -6,7 +6,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   let students = [];
 
   try {
-    const { data } = await StudentService.getAll();
+    const data = await StudentService.getAll();
     students = data.data;
   } catch (error) {
     console.log(error);
