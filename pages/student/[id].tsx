@@ -2,6 +2,7 @@ import Table from "../../components/Table";
 import Head from "next/head";
 import StudentService from "../../services/Student.service";
 import { Student as StudentModel } from "../../models/Student.model";
+import urlJoin from "url-join";
 
 export async function getServerSideProps(context: { params: { id: string } }) {
   const id = context.params.id;
@@ -59,6 +60,15 @@ export default function Student({
         <meta
           name="description"
           content={`Điểm số của ${data?.id} - ${data?.name}`}
+        />
+        <meta
+          property="og:image"
+          content={urlJoin(
+            process.env.NEXT_PUBLIC_SITE_URL!,
+            "api",
+            "og-image",
+            data?.id,
+          )}
         />
         <meta
           name="og:description"

@@ -26,7 +26,7 @@ export default function SearchModal() {
 
   const { data, error, isLoading } = useSWR(
     query ? [`/api/search/${query}`, query] : null,
-    ([url, query]) => apiNext.get(url).then((res) => res.data)
+    ([url, query]) => apiNext.get(url).then((res) => res.data),
   );
 
   const debounceSearch = useCallback(
@@ -34,13 +34,13 @@ export default function SearchModal() {
       setQuery(input);
       setSearchResult(data?.data || []);
     }, 1000),
-    []
+    [],
   );
 
   useEffect(() => {
     const history = plainToInstance(
       Student,
-      JSON.parse(LocalStorageService.get("searchHistory") as string)
+      JSON.parse(LocalStorageService.get("searchHistory") as string),
     );
     // @ts-ignore
     setSearchHistory(history || []);
@@ -80,7 +80,7 @@ export default function SearchModal() {
       newSearchHistory.splice(index, 1);
       setSearchHistory(newSearchHistory);
     },
-    [searchHistory]
+    [searchHistory],
   );
 
   const setHistory = useCallback(
@@ -89,7 +89,7 @@ export default function SearchModal() {
         setSearchHistory([student, ...searchHistory]);
       }
     },
-    [searchHistory]
+    [searchHistory],
   );
 
   const studentList = useMemo(() => {

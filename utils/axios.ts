@@ -24,7 +24,7 @@ axiosBaseAPIInstance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 const axiosNextAPIInstance = axios.create({
