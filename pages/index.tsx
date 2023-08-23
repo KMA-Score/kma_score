@@ -1,4 +1,5 @@
 import Head from "next/head";
+import urlJoin from "url-join";
 
 export default function Home() {
   return (
@@ -8,6 +9,14 @@ export default function Home() {
         <meta
           property="og:description"
           content="Website tra cứu điểm dành cho sinh viên KMA"
+        />
+        <meta
+          property="og:image"
+          content={urlJoin(
+            process.env.NEXT_PUBLIC_SITE_URL!,
+            "api",
+            "og-image",
+          )}
         />
         <meta
           name="description"
